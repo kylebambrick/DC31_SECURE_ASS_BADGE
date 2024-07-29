@@ -1,0 +1,7 @@
+{
+    "NAME": "ASS-420",
+    "PATTERN": 420,
+    "COUNT": 0,
+    "UNLOCKS": ["INIT"],
+    "SWARM": ["GOD-420","ASS-666"]
+}

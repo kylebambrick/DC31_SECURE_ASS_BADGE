@@ -1,0 +1,209 @@
+#ifndef ASSG_H
+#define ASSG_H
+
+#include "Arduino.h"
+#include <vector>
+
+#define DEBUG 0
+
+#if DEBUG == 0
+#define debug(x) Serial.print(x)
+#define debugln(x) Serial.println(x)
+#else
+#define debug(x)
+#define debugln(x)
+#endif
+
+#define PIXEL_PIN         27
+#define PIXEL_COUNT       20
+#define PIXEL_MOUTH       5
+#define PIXEL_EYES        15
+
+#define BUTTON_PIN_A      33
+#define BUTTON_PIN_B      32
+#define SWITCH_PIN        4
+
+#define LORA_SS           5
+#define LORA_RST          14
+#define LORA_DI0          2
+
+#define TRANSMIT_DELAY    -200
+
+enum class assStateName {
+  STATE,
+  STATE_S,
+  STATE_A,
+  STATE_B
+};
+
+enum class assStates {
+  PUSHED,
+  WIFI, LORA,
+  NONE,
+  INIT, IDLE, BLING, EXIT, FIRE, KILLALLHUMANS
+};
+
+enum class assMouthTalk {
+  WIFI_200, WIFI_404, WIFI_200POST, WIFI_CONNECT, WIFI_HAXOR,
+  UNLOCK, BORED, TALK, FREAK, NEWFRIEND,
+  LORA_BADPACKET, LORA_RECEIPT, LORA_LEADCHANGE, LORA_MELEAD
+};
+
+enum class assUnlocks {
+  NONE,INIT,
+  RECEIVED_UNLOCK,
+  RECEIVED_HELLO,
+  BOOBS,
+  XSS,
+  HACKTHEPLANET,
+  KILLALLHUMANS,
+  DEBUGIT,
+  MATTDAMON,
+  AUDIOSTEG,
+  BADCOMMIT,
+  CHANGEME,
+  Petpika,
+  PIKA,
+  ZAPP,
+  ANSI,
+  CHANGED,
+  IDOR,
+  ANYTHINGWOKRS,
+  WIRESHARK,
+  PASSWORD_UNLOCK,
+  SecurityASSurance,
+  ASSymmetricEncryption,
+  ASSOUT,
+  ASSUP,
+  ILLEGALTOSELLONEBAY,
+  BLAME,
+  GOGGLYEYES,
+  ASSHAT,
+  WAVE,
+  ILIKEBIG,
+  FISH,
+  SQLI,
+  NINEONEFIVE,
+  FOUND,
+  AssOverTeakettle,
+  ASSB_CKW3RDS,
+  FOURZEROFOUR,
+  MYCODEISLIKEYOURASS_BEAUTIFUL,
+  PWND_Yur_ASS,
+  FIREwall_IN_THE_assHOLE,
+  SHOVE_IT_UP_YUR,
+  SMACK_MY_SECURE_ASS,
+  I_L1K3_B1G,
+  MY_ASS_15_BETTER_THAN_YURS,
+  U_CRACK_ME,
+  BACKD00Rd_UR_ASS,
+  TWO_FINGERS_BUT_WHOLE,
+  GOTroot_0N_UR_ASS
+}; 
+
+enum class assPatternCore {
+  NONE,
+  COLOR,
+  PULSE,
+  BLINK,
+  SPARKLE,SPARKLEONE,SPARKLETEN,
+  RAINBOW,
+  RAINBOWRANDOM,
+  SNAKE,
+  SCAN,
+  HYPNO,HYPNOMINUS,
+  RANDO,
+  PINWHEEL,PINWHEELMINUS,
+  ONEBY,
+  FILLRANDO,
+  PULSED,
+  FLAG,
+  DRIP,
+  CHASER,CHASERMINUS,CHASERTHREE,CHASER3M,
+  CIRCLE,
+  RANDOM
+};
+
+enum class assPatternEyes {
+  STATIC,RANDOM,PULSE,BLINK,SPARKLE,CHASER,SNAKE,SCAN,HYPNO,RANDO,PINWHEEL,ONEBY,FILLRANDO,PULSED,FLAG,DRIP,CIRCLE,
+
+  // 0 - COLOR
+  NONE,RED,GREEN,BLUE,WHITE,TEAL,PURPLE,YELLOW,
+
+  // 1 - BLINK
+  BLINKRED,BLINKBLUE,BLINKORANGE,
+  BLINKRW,BLINKYG,BLINKPL,BLINKBW,
+
+  // 2 - PULSE
+  PULSEYELLOW,PULSETEAL,PULSEPURPLE,PULSERED,
+  PULSEDOR,PULSEDGW,PULSEBP,
+
+  // 3 - SPARKLE
+  SPARKLEWHITE,SPARKLERED,SPARKLELIME,
+  SPARKLETEAL,SPARKLEPURPLE,SPARKLEYELLOW,
+
+  // 4 - SCAN
+  SCANRED,SCANWHITE,SCANBLUE,SCANLIME,
+
+  // 5 - CHASER + CIRCLEV
+  CIRCLEWR, CIRCLEYG, CIRCLERP,
+  CHASERBW, CHASERWO, CHASERFAST,
+
+  // 6 - Oneby + SNAKE
+  ONEBYHELLO,ONEBYPURP,ONEBYFROG,
+  SNAKEPURP,SNAKEGARD,SNAKERATT,
+
+
+  // 7 - pinwheel + hypno
+  PINWHEELAM,PINWHEELRGB,PINWHEELTHREE,
+  HYPNOTOAD,HYPNOP,HYPNOY,
+
+  // 8 - Drip + Fill rando
+  DRIPGREEN,DRIPRW,DRIPPURP,
+  FILLRANDOONE,FILLRANDOTWO,FILLRANDOTHREE,
+
+  // 9 - RAINBOWS
+
+  RAINBOW,RAINBOWFAST,RAINBOWSLOW,RAINBOWRANDOM,RAINBOWRANDOMFAST,RANDOFAST,FLAGFAST,
+
+
+  // Other
+  RECEIVED_UNLOCK,RECEIVED_HELLO
+
+};
+
+enum class assPatternMouth {
+  STATIC, LEFT, RIGHT, BLINK, NONE, IDLE, RAINBOW, PULSE, SPARKLE,
+  PULSEAUTON, PULSELORA
+};
+
+struct assUnlock {
+  assUnlocks unlock;
+  String name;
+  int value;
+};
+
+struct assPat {
+  assPatternEyes patName;
+  int category;
+  int place_in_line;
+  int uniqueID;
+  assPatternCore patCore;
+  int diff;
+  uint32_t color;
+  uint32_t colorOff;
+  uint32_t color3;
+  String name;
+  bool unlocked;
+};
+
+struct assInfo {
+  String name;
+  int pattern;
+  int count;
+  std::vector<String> unlocks;
+  std::vector<String> swarm;
+};
+
+
+#endif // ASSG_H
